@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>3D Italian Artisan — Models</title>
+<meta name="description" content="3D Italian Artisan — Diorama and Articulated Action Figures. View descriptions, instructions and PDFs.">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<style>
+*{box-sizing:border-box}:root{--muted:#64748b;--accent:#0ea5e9}
+body{margin:0;font-family:Inter,system-ui,Arial;background:#f1f5f9;color:#0f172a}
+header{position:sticky;top:0;z-index:20;background:rgba(15,23,42,.96);color:#fff;display:flex;align-items:center;justify-content:space-between;gap:12px;padding:16px 22px;box-shadow:0 10px 30px rgba(0,0,0,.2)}
+.logo{font-weight:900;font-size:22px}.sub{font-size:13px;opacity:.8;margin-top:4px;max-width:620px;line-height:1.4}
+.header-right{display:flex;gap:10px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
+.lang-select{background:#fff;color:#0f172a;border:0;border-radius:999px;padding:11px 14px;font-weight:700;cursor:pointer}
+.btn{border:0;cursor:pointer;border-radius:999px;padding:11px 18px;font-weight:700}.btn-primary{background:#fff;color:#0f172a}.btn-accent{background:var(--accent);color:#fff}.btn-ghost{background:#e2e8f0}
+.hero{max-width:1100px;margin:28px auto 10px;padding:0 20px}.hero h1{font-size:42px;line-height:1.05;margin:0}.hero p{color:var(--muted);font-size:17px;max-width:700px}
+.searchbar{max-width:1100px;margin:18px auto;padding:0 20px;display:flex;gap:10px}.searchbar input{flex:1;padding:14px 16px;border:1px solid #cbd5e1;border-radius:12px;font-size:16px}
+.tabs{max-width:1100px;margin:0 auto;padding:0 20px;display:flex;gap:10px;flex-wrap:wrap}
+.grid{max-width:1100px;margin:18px auto 60px;padding:0 20px;display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.card{background:#fff;border-radius:18px;overflow:hidden;box-shadow:0 8px 25px rgba(15,23,42,.08);display:flex;flex-direction:column;transition:transform .15s}.card:hover{transform:translateY(-3px)}
+.thumb{height:230px;position:relative;background:linear-gradient(135deg,#0ea5e9,#7c3aed);color:#fff;overflow:hidden;cursor:pointer}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.thumb .overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(0,0,0,.75),transparent 55%);display:flex;flex-direction:column;justify-content:flex-end;padding:16px}
+.thumb small{background:rgba(255,255,255,.25);padding:6px 10px;border-radius:999px;width:fit-content}
+.thumb .ph{height:100%;display:flex;flex-direction:column;justify-content:space-between;padding:18px}.thumb .ph b{font-size:32px}
+.card-body{padding:16px}.card-body h3{margin:0 0 6px}.card-body p{color:var(--muted);font-size:14px;margin:0 0 14px;min-height:38px}
+.actions{display:flex;gap:8px}.actions button{flex:1}
+.modal{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}.modal.open{display:flex}
+.box{background:#fff;width:min(920px,100%);max-height:92vh;overflow:auto;border-radius:18px;padding:20px}
+.viewer{width:min(1100px,100%);height:92vh;background:#1e293b;color:#fff;border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.viewer-top{display:flex;flex-wrap:wrap;gap:12px;align-items:center;justify-content:space-between;padding:14px 16px}
+.viewer-top .vmeta{display:flex;gap:12px;align-items:flex-start}.vmeta img{width:72px;height:72px;object-fit:cover;border-radius:10px}
+.zoom{display:flex;gap:6px;align-items:center}.zoom button{background:#fff;color:#111;border:0;border-radius:10px;padding:9px 13px;font-weight:800;cursor:pointer}
+.viewer iframe{flex:1;width:100%;border:0;background:#fff}
+label{display:block;font-weight:700;margin:14px 0 6px}input[type=text],input[type=url],textarea,select{width:100%;padding:12px;border:1px solid #cbd5e1;border-radius:10px;font-size:15px}
+code{background:#0f172a;color:#7dd3fc;padding:2px 6px;border-radius:6px}.empty{text-align:center;padding:40px;color:var(--muted)}
+#imgPreview{width:100%;height:180px;object-fit:cover;border-radius:12px;display:none;margin-top:10px;border:1px solid #e2e8f0}
+@media(max-width:600px){.hero h1{font-size:32px}header{flex-direction:column;align-items:flex-start}}
+</style></head><body>
+<header>
+<div><div class="logo">3D Italian Artisan</div><div class="sub" data-i18n="subtitle">On this page, you will find my models. By clicking on the images, you can view the description and instructions for each model. Have fun! – Max</div></div>
+<div class="header-right">
+<label for="langSelect" style="margin:0;font-size:13px;opacity:.8">🌐</label>
+<select id="langSelect" class="lang-select" onchange="setLang(this.value)" aria-label="Language">
+<option value="en">🇬🇧 English</option><option value="it">🇮🇹 Italiano</option><option value="de">🇩🇪 Deutsch</option><option value="ja">🇯🇵 日本語</option>
+</select>
+<button class="btn btn-primary" onclick="openAuthor()">＋ <span data-i18n="authorArea">Author Area</span></button>
+</div></header>
+
+<div class="hero"><h1 data-i18n="heroTitle">Diorama &amp; Articulated Action Figures.</h1><p data-i18n="heroSub">Browse the two collections. Click on an image to read the description and instructions, and to open the PDF with zoom.</p></div>
+<div class="searchbar"><input id="q" data-i18n-ph="searchPlaceholder" placeholder="🔍 Search for a model..." oninput="render()"><button class="btn btn-accent" onclick="render()" data-i18n="searchBtn">Search</button></div>
+<div class="tabs"><button class="btn btn-accent" id="tabAll" onclick="setCat('All')" data-i18n="all">All</button><button class="btn btn-ghost" id="tabDiorama" onclick="setCat('Diorama')">🏛️ Diorama</button><button class="btn btn-ghost" id="tabArticulated" onclick="setCat('Articulated Action Figures')">🤖 Articulated Action Figures</button></div>
+<div id="grid" class="grid"></div>
+<div style="text-align:center;color:#94a3b8;padding:0 0 30px;font-size:13px" data-i18n="footer">© 2026 3D Italian Artisan — Static site in a single HTML file.</div>
+
+<div id="authorModal" class="modal"><div class="box">
+<div style="display:flex;justify-content:space-between;align-items:center"><h2 style="margin:0">🔐 <span data-i18n="authorTitle">Author Area</span></h2><button class="btn btn-ghost" onclick="closeModal('authorModal')">✕</button></div>
+<div id="loginBox"><label style="margin-top:14px" data-i18n="authorCode">Author Code</label><input id="codeInput" type="text" data-i18n-ph="authorCodePh" placeholder="Enter the author code"><button class="btn btn-accent" style="margin-top:12px;width:100%" onclick="login()"><span data-i18n="unlock">Unlock Author Area</span> →</button></div>
+<div id="formBox" style="display:none">
+<label data-i18n="modelName">Model Name *</label><input id="fName" type="text" data-i18n-ph="modelNamePh" placeholder="E.g.: Diorama — Medieval Castle">
+<label data-i18n="category">Category</label><select id="fCat"><option>Diorama</option><option>Articulated Action Figures</option></select>
+<label data-i18n="shortDesc">Short Description</label><textarea id="fDesc" rows="2" data-i18n-ph="shortDescPh" placeholder="Describe the model..."></textarea>
+<label data-i18n="instructions">Instructions</label><textarea id="fIstr" rows="4" data-i18n-ph="instructionsPh" placeholder="Write step by step how to assemble / use the model..."></textarea>
+<label data-i18n="previewImage">🖼️ Preview Image — Upload a photo / render of the model</label><input id="fImg" type="file" accept="image/*" onchange="previewImg(this)">
+<img id="imgPreview"><small style="color:#64748b" data-i18n="previewNote">If you don't upload an image, the first page of the PDF will be automatically generated as a preview.</small>
+<label data-i18n="orImageLink">Or paste an Image Link (URL)</label><input id="fImgUrl" type="url" placeholder="https://.../preview.jpg" oninput="document.getElementById('imgPreview').src=this.value;document.getElementById('imgPreview').style.display='block'">
+<label data-i18n="pdfUpload">PDF — Upload a file from your computer</label><input id="fFile" type="file" accept="application/pdf">
+<label data-i18n="orPdfLink">Or paste a PDF Link (public URL)</label><input id="fUrl" type="url" placeholder="https://.../model.pdf">
+<div style="display:flex;gap:10px;margin-top:16px"><button class="btn btn-accent" style="flex:1" onclick="addModel()">＋ <span data-i18n="publish">Publish Model</span></button><button class="btn btn-ghost" onclick="logout()" data-i18n="logout">Log out</button></div>
+<details style="margin-top:16px;border:1px solid #e2e8f0;border-radius:10px;padding:12px"><summary style="cursor:pointer;font-weight:700">⚙️ <span data-i18n="advanced">Advanced option: add via code</span></summary><p style="font-size:13px;color:#64748b;margin:10px 0 0" data-i18n="advancedText">Open this file with an editor, search for MODELLI_INIZIALI and add a line with name, category, description, instructions, image and PDF link.</p></details>
+<div id="manage"></div></div></div></div>
+
+<div id="viewerModal" class="modal"><div class="viewer">
+<div class="viewer-top"><div class="vmeta"><img id="vImg" style="display:none"><div><b id="vTitle">Model</b><div id="vCat" style="opacity:.85;font-size:13px;max-width:520px;line-height:1.5"></div></div></div>
+<div class="zoom"><button onclick="zoom(-1)">−</button><span id="zoomLabel">100%</span><button onclick="zoom(1)">＋</button><button onclick="setZoom(100)" data-i18n="fit">Fit</button><button onclick="setZoom(150)">150%</button><button onclick="setZoom(200)">200%</button></div>
+<div style="display:flex;gap:8px"><a id="vDownload" href="#" download><button class="btn btn-primary">⬇ <span data-i18n="downloadPdf">Download PDF</span></button></a><button class="btn" style="background:#334155;color:#fff" onclick="closeModal('viewerModal')">✕ <span data-i18n="close">Close</span></button></div></div>
+<div style="background:#0f172a;padding:8px 16px;font-size:13px" data-i18n="zoomHint">Use the + / − buttons to zoom. On mobile you can also pinch-to-zoom on the PDF.</div>
+<iframe id="pdfFrame"></iframe></div></div>
+
+<script>
+const CODICE_AUTORE="1234"; // Change your author code here
+const I18N={
+en:{subtitle:"On this page, you will find my models. By clicking on the images, you can view the description and instructions for each model. Have fun! – Max",authorArea:"Author Area",heroTitle:"Diorama & Articulated Action Figures.",heroSub:"Browse the two collections. Click on an image to read the description and instructions, and to open the PDF with zoom.",searchPlaceholder:"🔍 Search for a model...",searchBtn:"Search",all:"All",footer:"© 2026 3D Italian Artisan — Static site in a single HTML file.",authorTitle:"Author Area",authorCode:"Author Code",authorCodePh:"Enter the author code",unlock:"Unlock Author Area",modelName:"Model Name *",modelNamePh:"E.g.: Diorama — Medieval Castle",category:"Category",shortDesc:"Short Description",shortDescPh:"Describe the model...",instructions:"Instructions",instructionsPh:"Write step by step how to assemble / use the model...",previewImage:"🖼️ Preview Image — Upload a photo / render of the model",previewNote:"If you don't upload an image, the first page of the PDF will be automatically generated as a preview.",orImageLink:"Or paste an Image Link (URL)",pdfUpload:"PDF — Upload a file from your computer",orPdfLink:"Or paste a PDF Link (public URL)",publish:"Publish Model",logout:"Log out",advanced:"Advanced option: add via code",advancedText:"Open this file with an editor, search for MODELLI_INIZIALI and add a line with name, category, description, instructions, image and PDF link.",fit:"Fit",downloadPdf:"Download PDF",close:"Close",zoomHint:"Use the + / − buttons to zoom. On mobile you can also pinch-to-zoom on the PDF.",noModels:"No models found",noModelsSub:"Use the Author Area at the top right to add one.",readZoom:"👁 Read / Zoom",wrongCode:"Wrong code",enterName:"Enter the name",published:"Model published with preview!",uploadPdfOrLink:"Upload a PDF or paste a PDF link",manage:"Manage models",deleteBtn:"🗑 Delete",deleteConfirm:"Delete this model?",descLabel:"Description:",instrLabel:"Instructions:"},
+it:{subtitle:"In questa pagina troverai i miei modelli. Cliccando sulle immagini puoi vedere descrizione e istruzioni di ogni modello. Divertiti! – Max",authorArea:"Area Autore",heroTitle:"Diorama & Articulated Action Figures.",heroSub:"Sfoglia le due collezioni. Clicca su un'immagine per leggere descrizione e istruzioni, e per aprire il PDF con zoom.",searchPlaceholder:"🔍 Cerca un modello...",searchBtn:"Cerca",all:"Tutti",footer:"© 2026 3D Italian Artisan — Sito statico in un unico file HTML.",authorTitle:"Area Autore",authorCode:"Codice Autore",authorCodePh:"Inserisci il codice autore",unlock:"Sblocca Area Autore",modelName:"Nome del Modello *",modelNamePh:"Es.: Diorama — Castello Medievale",category:"Categoria",shortDesc:"Descrizione breve",shortDescPh:"Descrivi il modello...",instructions:"Istruzioni",instructionsPh:"Scrivi passo dopo passo come montare / usare il modello...",previewImage:"🖼️ Immagine di anteprima — Carica foto / render del modello",previewNote:"Se non carichi un'immagine, verrà generata in automatico la prima pagina del PDF come anteprima.",orImageLink:"Oppure incolla Link Immagine (URL)",pdfUpload:"PDF — Carica file dal computer",orPdfLink:"Oppure incolla Link PDF (URL pubblico)",publish:"Pubblica Modello",logout:"Esci",advanced:"Opzione avanzata: aggiungi tramite codice",advancedText:"Apri questo file con un editor, cerca MODELLI_INIZIALI e aggiungi una riga con nome, categoria, descrizione, istruzioni, immagine e link PDF.",fit:"Adatta",downloadPdf:"Scarica PDF",close:"Chiudi",zoomHint:"Usa i pulsanti + / − per zoomare. Su mobile puoi anche fare pinch-to-zoom sul PDF.",noModels:"Nessun modello trovato",noModelsSub:"Usa l'Area Autore in alto a destra per aggiungerne uno.",readZoom:"👁 Leggi / Zooma",wrongCode:"Codice errato",enterName:"Inserisci il nome",published:"Modello pubblicato con anteprima!",uploadPdfOrLink:"Carica un PDF o incolla un link PDF",manage:"Gestisci modelli",deleteBtn:"🗑 Elimina",deleteConfirm:"Eliminare questo modello?",descLabel:"Descrizione:",instrLabel:"Istruzioni:"},
+de:{subtitle:"Auf dieser Seite findest du meine Modelle. Wenn du auf die Bilder klickst, kannst du die Beschreibung und Anleitung für jedes Modell ansehen. Viel Spaß! – Max",authorArea:"Autorenbereich",heroTitle:"Diorama & Articulated Action Figures.",heroSub:"Durchsuche die zwei Kollektionen. Klicke auf ein Bild, um Beschreibung und Anleitung zu lesen und das PDF mit Zoom zu öffnen.",searchPlaceholder:"🔍 Modell suchen...",searchBtn:"Suchen",all:"Alle",footer:"© 2026 3D Italian Artisan — Statische Website in einer einzigen HTML-Datei.",authorTitle:"Autorenbereich",authorCode:"Autorencode",authorCodePh:"Autorencode eingeben",unlock:"Autorenbereich freischalten",modelName:"Modellname *",modelNamePh:"Z.B.: Diorama — Mittelalterliche Burg",category:"Kategorie",shortDesc:"Kurzbeschreibung",shortDescPh:"Beschreibe das Modell...",instructions:"Anleitung",instructionsPh:"Schreibe Schritt für Schritt, wie das Modell zusammengebaut / benutzt wird...",previewImage:"🖼️ Vorschaubild — Foto / Render des Modells hochladen",previewNote:"Wenn du kein Bild hochlädst, wird automatisch die erste Seite des PDFs als Vorschau erzeugt.",orImageLink:"Oder Bild-Link einfügen (URL)",pdfUpload:"PDF — Datei vom Computer hochladen",orPdfLink:"Oder PDF-Link einfügen (öffentliche URL)",publish:"Modell veröffentlichen",logout:"Abmelden",advanced:"Erweiterte Option: per Code hinzufügen",advancedText:"Öffne diese Datei mit einem Editor, suche nach MODELLI_INIZIALI und füge eine Zeile mit Name, Kategorie, Beschreibung, Anleitung, Bild und PDF-Link hinzu.",fit:"Anpassen",downloadPdf:"PDF herunterladen",close:"Schließen",zoomHint:"Nutze die + / − Tasten zum Zoomen. Auf dem Handy kannst du auch per Pinch-to-Zoom zoomen.",noModels:"Keine Modelle gefunden",noModelsSub:"Nutze den Autorenbereich oben rechts, um eines hinzuzufügen.",readZoom:"👁 Lesen / Zoomen",wrongCode:"Falscher Code",enterName:"Name eingeben",published:"Modell mit Vorschau veröffentlicht!",uploadPdfOrLink:"Lade ein PDF hoch oder füge einen PDF-Link ein",manage:"Modelle verwalten",deleteBtn:"🗑 Löschen",deleteConfirm:"Dieses Modell löschen?",descLabel:"Beschreibung:",instrLabel:"Anleitung:"},
+ja:{subtitle:"このページでは、私のモデルをご覧いただけます。画像をクリックすると、各モデルの説明と作り方を確認できます。楽しんでください！ – Max",authorArea:"作者エリア",heroTitle:"ジオラマ & 可動アクションフィギュア",heroSub:"2つのコレクションをご覧ください。画像をクリックすると説明と作り方を読め、PDFをズームして開けます。",searchPlaceholder:"🔍 モデルを検索...",searchBtn:"検索",all:"すべて",footer:"© 2026 3D Italian Artisan — 1つのHTMLファイルでできた静的サイトです。",authorTitle:"作者エリア",authorCode:"作者コード",authorCodePh:"作者コードを入力",unlock:"作者エリアのロック解除",modelName:"モデル名 *",modelNamePh:"例：ジオラマ — 中世の城",category:"カテゴリー",shortDesc:"簡単な説明",shortDescPh:"モデルを説明してください...",instructions:"作り方",instructionsPh:"組み立て方 / 使い方を手順ごとに書いてください...",previewImage:"🖼️ プレビュー画像 — モデルの写真 / レンダーをアップロード",previewNote:"画像をアップロードしない場合、PDFの最初のページが自動でプレビューとして生成されます。",orImageLink:"または画像リンクを貼り付け（URL）",pdfUpload:"PDF — パソコンからファイルをアップロード",orPdfLink:"またはPDFリンクを貼り付け（公開URL）",publish:"モデルを公開",logout:"ログアウト",advanced:"高度なオプション：コードで追加",advancedText:"このファイルをエディタで開き、MODELLI_INIZIALI を検索して、名前・カテゴリー・説明・作り方・画像・PDFリンクの行を追加してください。",fit:"フィット",downloadPdf:"PDFをダウンロード",close:"閉じる",zoomHint:"+ / − ボタンでズームできます。スマホではピンチでズームもできます。",noModels:"モデルが見つかりません",noModelsSub:"右上の作者エリアから追加してください。",readZoom:"👁 読む / ズーム",wrongCode:"コードが違います",enterName:"名前を入力してください",published:"プレビュー付きでモデルを公開しました！",uploadPdfOrLink:"PDFをアップロードするか、PDFリンクを貼り付けてください",manage:"モデルを管理",deleteBtn:"🗑 削除",deleteConfirm:"このモデルを削除しますか？",descLabel:"説明：",instrLabel:"作り方："}
+};
+let LANG=localStorage.getItem('site_lang')||'en';
+function t(k){return (I18N[LANG]&&I18N[LANG][k])||I18N.en[k]||k;}
+function setLang(l){LANG=l;localStorage.setItem('site_lang',l);document.documentElement.lang=l;document.getElementById('langSelect').value=l;document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n);});document.querySelectorAll('[data-i18n-ph]').forEach(el=>{el.placeholder=t(el.dataset.i18nPh);});render();}
+const MODELLI_INIZIALI=[
+ // ★★ MODELLO 1 — ESEMPIO COMPLETO — DUPLICA QUESTA RIGA PER OGNI NUOVO MODELLO ★★
+ { nome: "Diorama — Medieval Castle", categoria: "Diorama",
+   descrizione: "Medieval castle diorama with towers, gate and courtyard. Perfect for display and photography. Scale 1:72. Approx. 28 x 20 cm once assembled.",
+   istruzioni: "1. Download the PDF and print all pages on thick paper / cardstock (200-250 gsm).\n2. Cut out all pieces following the solid lines. Score along the dashed lines before folding.\n3. Assemble the two towers first, then the walls. Use white glue and let each part dry 10 minutes.\n4. Attach the gate, then place the castle on the base. Add the courtyard details last.\n5. Let it dry completely (1 hour) before displaying or photographing.",
+   immagine: "assets/images/diorama-medieval-castle.jpg",
+   pdf: "assets/pdfs/diorama-medieval-castle.pdf" },
+
+ // ── TEMPLATE — COPIA DA QUI PER IL PROSSIMO MODELLO ──
+ // { nome: "Diorama — Name of your model", categoria: "Diorama",
+ //   descrizione: "Write a short description...",
+ //   istruzioni: "1. Download the PDF.\n2. Print...\n3. Assemble...",
+ //   immagine: "assets/images/your-file.jpg",
+ //   pdf: "assets/pdfs/your-file.pdf" },
+ // ── Per un'Action Figure usa: categoria: "Articulated Action Figures" ──
+];
+let filtroCat='All';
+let modelli=JSON.parse(localStorage.getItem('modelli_v3')||'null')||MODELLI_INIZIALI;
+let currentPdf="",currentZoom=100,pendingImg="";
+function save(){localStorage.setItem('modelli_v3',JSON.stringify(modelli));}
+function setCat(c){filtroCat=c;document.getElementById('tabAll').className='btn '+(c==='All'?'btn-accent':'btn-ghost');document.getElementById('tabDiorama').className='btn '+(c==='Diorama'?'btn-accent':'btn-ghost');document.getElementById('tabArticulated').className='btn '+(c==='Articulated Action Figures'?'btn-accent':'btn-ghost');render();}
+function thumbHTML(m,idx){
+ if(m.immagine) return `<div class="thumb" onclick="openViewer(${idx})"><img src="${m.immagine}" alt="${m.nome}"><div class="overlay"><small>${m.categoria} • PDF</small><b style="margin-top:8px">${m.nome}</b></div></div>`;
+ return `<div class="thumb" onclick="openViewer(${idx})"><div class="ph"><small>${m.categoria} • PDF</small><b>PDF</b><span>${m.nome}</span></div></div>`;
+}
+function render(){
+ const q=(document.getElementById('q').value||'').toLowerCase();
+ const list=modelli.filter(m=>(filtroCat==='All'||m.categoria===filtroCat)&&(m.nome+m.categoria+(m.descrizione||'')).toLowerCase().includes(q));
+ const g=document.getElementById('grid');
+ if(!list.length){g.innerHTML=`<div class="empty" style="grid-column:1/-1"><h3>${t('noModels')}</h3><p>${t('noModelsSub')}</p></div>`;return;}
+ g.innerHTML=list.map(m=>{const idx=modelli.indexOf(m);return `<div class="card">${thumbHTML(m,idx)}<div class="card-body"><h3>${m.nome}</h3><p>${m.descrizione||''}</p><div class="actions"><button class="btn btn-accent" onclick="openViewer(${idx})">${t('readZoom')}</button><a href="${m.pdf}" download style="flex:1"><button class="btn btn-ghost" style="width:100%">⬇ PDF</button></a></div></div></div>`;}).join('');
+ renderManage();
+}
+function openAuthor(){document.getElementById('authorModal').classList.add('open');}
+function closeModal(id){document.getElementById(id).classList.remove('open');}
+function login(){if(document.getElementById('codeInput').value.trim()===CODICE_AUTORE){document.getElementById('loginBox').style.display='none';document.getElementById('formBox').style.display='block';renderManage();}else alert(t('wrongCode'));}
+function logout(){document.getElementById('loginBox').style.display='block';document.getElementById('formBox').style.display='none';document.getElementById('codeInput').value='';}
+function previewImg(inp){const f=inp.files[0];if(!f)return;const r=new FileReader();r.onload=e=>{pendingImg=e.target.result;const p=document.getElementById('imgPreview');p.src=pendingImg;p.style.display='block';};r.readAsDataURL(f);}
+async function pdfFirstPageImage(file){
+ try{const buf=await file.arrayBuffer();const pdf=await pdfjsLib.getDocument({data:buf}).promise;const page=await pdf.getPage(1);const vp=page.getViewport({scale:1.2});const c=document.createElement('canvas');c.width=vp.width;c.height=vp.height;await page.render({canvasContext:c.getContext('2d'),viewport:vp}).promise;return c.toDataURL('image/jpeg',0.85);}catch(e){return "";}
+}
+async function addModel(){
+ const nome=document.getElementById('fName').value.trim();if(!nome)return alert(t('enterName'));
+ const file=document.getElementById('fFile').files[0];const url=document.getElementById('fUrl').value.trim();
+ const imgUrl=document.getElementById('fImgUrl').value.trim();
+ let immagine=pendingImg||imgUrl||"";
+ const base={nome,categoria:document.getElementById('fCat').value,descrizione:document.getElementById('fDesc').value.trim(),istruzioni:document.getElementById('fIstr').value.trim(),immagine,pdf:url||''};
+ const finish=()=>{modelli.unshift(base);save();render();pendingImg="";alert(t('published'));closeModal('authorModal');};
+ if(file){const r=new FileReader();r.onload=async e=>{base.pdf=e.target.result;if(!immagine) immagine=await pdfFirstPageImage(file);base.immagine=immagine;finish();};r.readAsDataURL(file);}
+ else if(url){base.immagine=immagine;finish();}
+ else alert(t('uploadPdfOrLink'));
+}
+function renderManage(){document.getElementById('manage').innerHTML=`<h3 style="margin-top:20px">${t('manage')}</h3>`+modelli.map((m,i)=>`<div style="display:flex;justify-content:space-between;align-items:center;gap:10px;padding:10px;border:1px solid #e2e8f0;border-radius:10px;margin-bottom:8px"><div style="display:flex;gap:10px;align-items:center">${m.immagine?`<img src="${m.immagine}" style="width:56px;height:56px;object-fit:cover;border-radius:8px">`:'<div style="width:56px;height:56px;border-radius:8px;background:linear-gradient(135deg,#0ea5e9,#7c3aed);display:flex;align-items:center;justify-content:center;color:#fff;font-weight:800">PDF</div>'}<span><b>${m.nome}</b><br><small>${m.categoria}</small></span></div><button class="btn btn-ghost" onclick="delModel(${i})">${t('deleteBtn')}</button></div>`).join('');}
+function delModel(i){if(confirm(t('deleteConfirm'))){modelli.splice(i,1);save();render();}}
+function openViewer(i){const m=modelli[i];currentPdf=m.pdf;currentZoom=100;document.getElementById('vTitle').textContent=m.nome;const vi=document.getElementById('vImg');if(m.immagine){vi.src=m.immagine;vi.style.display='block';}else vi.style.display='none';document.getElementById('vCat').innerHTML=`<div style="margin-top:6px"><b>${t('descLabel')}</b><br>${m.descrizione||'—'}</div><div style="margin-top:8px"><b>${t('instrLabel')}</b><br>${(m.istruzioni||'—').replace(/\n/g,'<br>')}</div>`;document.getElementById('vDownload').href=m.pdf;applyZoom();document.getElementById('viewerModal').classList.add('open');}
+function applyZoom(){document.getElementById('zoomLabel').textContent=currentZoom+'%';const f=document.getElementById('pdfFrame');f.style.transform=`scale(${currentZoom/100})`;f.style.transformOrigin='top left';f.style.width=(10000/currentZoom)+'%';f.style.height=(10000/currentZoom)+'%';f.src=currentPdf+'#zoom='+currentZoom;}
+function zoom(d){currentZoom=Math.max(50,Math.min(300,currentZoom+d*25));applyZoom();}
+function setZoom(v){currentZoom=v;applyZoom();}
+setLang(LANG);
+</script></body></html>
